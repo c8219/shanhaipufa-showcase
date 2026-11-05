@@ -133,7 +133,6 @@
       <div class="hero-cta">
         <a class="btn" href="#features">了解六大功能</a>
         <a class="btn alt" href="https://shanhaipufa-demo.app.workbuddy.host/?sharecode=YWLJVTPCL5" target="_blank" rel="noopener">▶ 打开交互原型 ↗</a>
-        <a class="btn ghost" href="#demo" style="border-color:rgba(255,255,255,.7);color:#fff">查看演示材料</a>
       </div>
     </div>
     <div class="hero-img">
@@ -142,7 +141,7 @@
   </div>
 </header>
 
-<div class="disclaimer">本页为“山海普法通”AI普法智能体的产品概念展示页（设计稿 / 演示用途），所示界面为概念示意。可交互的静态原型见下方演示入口；两站均非已上线的生产运行系统，不连接生产 API、不采集真实用户数据。</div>
+<div class="disclaimer">本页为“山海普法通”AI普法智能体的产品概念展示页（设计稿 / 演示用途），所示界面为概念示意。可交互的静态原型可通过页面「打开交互原型」按钮访问；两站均非已上线的生产运行系统，不连接生产 API、不采集真实用户数据。</div>
 
 <!-- 痛点 -->
 <section>
@@ -278,7 +277,7 @@
     <div class="sec-head">
       <div class="kicker">成果与规划</div>
       <h2>原型成果与设计目标（规划值，非实测）</h2>
-      <p>v1.0 交互原型覆盖六大模块，并新增「自研模块验证台」与「现场评测台」；以下均为设计目标或规划值，不是实测结论。可现场复现的评测数值请到交互原型 ⑦/⑧ 查看，数值由评委本机浏览器计算。</p>
+      <p>v1.0 交互原型覆盖核心功能模块；以下均为设计目标或规划值，不是实测结论。</p>
     </div>
     <div class="stats">
       <div class="stat"><div class="big">v1.0</div><div class="lbl">交互原型（Web 单页静态）</div></div>
@@ -289,31 +288,6 @@
   </div>
 </section>
 
-<!-- 演示入口 -->
-<section style="background:#eef5f1" id="demo">
-  <div class="wrap">
-    <div class="sec-head">
-      <div class="kicker">演示入口</div>
-      <h2>产品演示入口</h2>
-      <p>下方链接为唯一对外演示入口。交互原型为静态预置问答，默认关闭实时生成、不连接生产 API、不采集真实用户数据；原型内含自研模块验证台与现场评测台，所有评测数值由评委本机浏览器现场计算。</p>
-    </div>
-    <div class="demo-entry">
-      <div class="de-label">官方演示入口 · 请填入方案附录二「在线演示站地址」与附录六核对清单</div>
-      <div class="de-url" id="demoUrl">https://shanhaipufa-demo.app.workbuddy.host/?sharecode=YWLJVTPCL5</div>
-      <div class="de-actions">
-        <a class="btn" href="https://shanhaipufa-demo.app.workbuddy.host/?sharecode=YWLJVTPCL5" target="_blank" rel="noopener">▶ 打开交互原型 ↗</a>
-        <button class="btn alt" id="copyBtn" type="button" style="border:0;cursor:pointer;font-family:inherit">📋 复制链接</button>
-      </div>
-      <p class="de-note">两站已串联：本页讲「为什么做」，交互原型证明「做出来了什么」；原型右上角可返回本页。体验二维码请由上方链接生成后贴入申报材料，此处不预置未核验的二维码图片。</p>
-    </div>
-    <div class="stats" style="margin-top:24px">
-      <div class="stat"><div class="big">✅</div><div class="lbl">交互原型（已上线 · 见上方链接）</div></div>
-      <div class="stat"><div class="big">✅</div><div class="lbl">自研模块验证台 / 现场评测报告 + CSV</div></div>
-      <div class="stat"><div class="big">⬜</div><div class="lbl">演示视频、体验二维码（待提交前补）</div></div>
-      <div class="stat"><div class="big">⬜</div><div class="lbl">代码仓库镜像、测试报告、试用反馈（待补）</div></div>
-    </div>
-  </div>
-</section>
 
 <footer>
   <div class="wrap">
@@ -331,24 +305,5 @@
   </div>
 </footer>
 
-<script>
-(function () {
-  var url = 'https://shanhaipufa-demo.app.workbuddy.host/?sharecode=YWLJVTPCL5';
-  var btn = document.getElementById('copyBtn');
-  if (!btn) return;
-  function done() { btn.textContent = '✅ 已复制'; setTimeout(function () { btn.textContent = '📋 复制链接'; }, 1600); }
-  btn.addEventListener('click', function () {
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(url).then(done).catch(fallback);
-    } else fallback();
-    function fallback() {
-      var ta = document.createElement('textarea');
-      ta.value = url; document.body.appendChild(ta); ta.select();
-      try { document.execCommand('copy'); done(); } catch (e) { btn.textContent = '请手动复制上方链接'; }
-      document.body.removeChild(ta);
-    }
-  });
-})();
-</script>
 </body>
 </html>
