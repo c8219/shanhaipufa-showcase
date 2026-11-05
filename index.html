@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>山海普法通 · AI 普法智能体 | 让法律跨越山海</title>
+<style>
+  :root{
+    --green:#0e6b46; --green2:#13935f; --sea:#1f6fb2; --gold:#e0a83d;
+    --bg:#f4f8f6; --card:#ffffff; --ink:#1f2a26; --muted:#5c6b64; --line:#e3ece7;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:"PingFang SC","Microsoft YaHei","Hiragino Sans GB",sans-serif;color:var(--ink);background:var(--bg);line-height:1.7;-webkit-font-smoothing:antialiased}
+  a{color:var(--sea);text-decoration:none}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+  .btn{display:inline-block;background:var(--green);color:#fff;padding:13px 26px;border-radius:30px;font-weight:600;transition:.2s}
+  .btn:hover{background:var(--green2);transform:translateY(-2px)}
+  .btn.alt{background:var(--sea)}
+  .btn.ghost{background:transparent;color:var(--green);border:2px solid var(--green)}
+
+  /* Hero */
+  header.hero{position:relative;overflow:hidden;background:linear-gradient(135deg,#0e6b46 0%,#13935f 45%,#1f6fb2 100%);color:#fff}
+  header.hero .wrap{display:flex;align-items:center;gap:40px;padding:70px 20px}
+  .hero-text{flex:1;min-width:300px}
+  .badge{display:inline-block;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.4);padding:6px 14px;border-radius:20px;font-size:13px;margin-bottom:18px;letter-spacing:1px}
+  .hero h1{font-size:46px;line-height:1.2;margin-bottom:14px;font-weight:800}
+  .hero h1 span{color:#ffe2a8}
+  .hero .slogan{font-size:20px;opacity:.95;margin-bottom:22px}
+  .hero p.lead{font-size:15px;opacity:.9;margin-bottom:28px;max-width:520px}
+  .hero-cta a{margin-right:12px;margin-bottom:12px}
+  .hero-img{flex:0 0 300px}
+  .hero-img img{width:100%;border-radius:18px;box-shadow:0 18px 40px rgba(0,0,0,.3);border:3px solid rgba(255,255,255,.5)}
+  @media(max-width:760px){header.hero .wrap{flex-direction:column;text-align:center;padding:50px 20px}.hero-img{flex:none;width:240px;margin-top:10px}.hero h1{font-size:34px}}
+
+  .disclaimer{background:#fff7e6;border-bottom:1px solid #f3e0b0;color:#7a5b12;font-size:13px;text-align:center;padding:9px 20px}
+
+  section{padding:60px 0}
+  .sec-head{text-align:center;margin-bottom:38px}
+  .sec-head .kicker{color:var(--green);font-weight:700;letter-spacing:2px;font-size:14px}
+  .sec-head h2{font-size:30px;margin:8px 0 10px}
+  .sec-head p{color:var(--muted);max-width:680px;margin:0 auto}
+
+  /* Pain points */
+  .grid{display:grid;gap:18px}
+  .g5{grid-template-columns:repeat(5,1fr)}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  .g2{grid-template-columns:repeat(2,1fr)}
+  @media(max-width:860px){.g5,.g3,.g2{grid-template-columns:1fr 1fr}}
+  @media(max-width:560px){.g5,.g3,.g2{grid-template-columns:1fr}}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;transition:.2s}
+  .card:hover{transform:translateY(-4px);box-shadow:0 12px 28px rgba(14,107,70,.12)}
+  .card .ico{font-size:30px;margin-bottom:10px}
+  .card h3{font-size:18px;margin-bottom:8px;color:var(--green)}
+  .card p{font-size:14px;color:var(--muted)}
+  .pain .num{display:inline-block;width:34px;height:34px;line-height:34px;text-align:center;border-radius:50%;background:var(--gold);color:#fff;font-weight:700;margin-bottom:10px}
+
+  /* Features */
+  .feat{display:flex;gap:18px;align-items:flex-start}
+  .feat .tag{flex:0 0 64px;height:64px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:30px;background:linear-gradient(135deg,#eaf5ef,#dcefe4)}
+  .feat h3{font-size:17px;color:var(--ink);margin-bottom:4px}
+  .feat .sub{font-size:12px;color:var(--green);font-weight:600;margin-bottom:6px}
+  .feat p{font-size:14px;color:var(--muted)}
+
+  /* Highlight band */
+  .band{background:linear-gradient(135deg,#0e6b46,#1f6fb2);color:#fff;border-radius:20px;padding:40px;display:flex;gap:30px;align-items:center}
+  .band img{flex:0 0 220px;width:220px;border-radius:14px;border:3px solid rgba(255,255,255,.4)}
+  .band h3{font-size:24px;margin-bottom:10px}
+  .band p{opacity:.95;font-size:15px}
+  @media(max-width:760px){.band{flex-direction:column;text-align:center}.band img{width:200px}}
+
+  /* Trust / 七道防线 */
+  .defense{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  @media(max-width:860px){.defense{grid-template-columns:1fr 1fr}}
+  .def{background:#fff;border:1px solid var(--line);border-left:4px solid var(--green);border-radius:12px;padding:16px}
+  .def b{color:var(--green)}
+  .def span{display:block;font-size:12px;color:var(--muted);margin-top:4px}
+
+  /* Innovation */
+  .inn{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px;position:relative}
+  .inn .q{font-size:26px;color:var(--gold)}
+  .inn h3{font-size:17px;margin:6px 0}
+  .inn p{font-size:13.5px;color:var(--muted)}
+
+  /* Scenes */
+  .scene{display:flex;gap:30px;align-items:center}
+  .scene img{flex:0 0 380px;width:380px;border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,.12)}
+  .scene ul{list-style:none}
+  .scene li{padding:12px 0;border-bottom:1px dashed var(--line);display:flex;gap:12px}
+  .scene li b{color:var(--green)}
+  @media(max-width:760px){.scene{flex-direction:column}.scene img{width:100%}}
+
+  /* Compliance */
+  .comp{background:#0f2330;color:#dfeaf0;border-radius:20px;padding:42px}
+  .comp h2{color:#fff;text-align:center;font-size:28px;margin-bottom:8px}
+  .comp .sub{text-align:center;color:#9fc3d6;margin-bottom:28px}
+  .comp .row{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  @media(max-width:760px){.comp .row{grid-template-columns:1fr}}
+  .comp .item{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:18px}
+  .comp .item h4{color:#7fd1a6;font-size:16px;margin-bottom:6px}
+  .comp .item p{font-size:13px;color:#c4d6df}
+
+  /* Team */
+
+  /* Stats */
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;text-align:center}
+  @media(max-width:760px){.stats{grid-template-columns:1fr 1fr}}
+  .stat{background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px}
+  .stat .big{font-size:30px;font-weight:800;color:var(--green)}
+  .stat .lbl{font-size:13px;color:var(--muted);margin-top:4px}
+
+  /* Contact / footer */
+  footer{background:#0e6b46;color:#eaf5ef;padding:50px 0 30px}
+  footer .wrap{display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap}
+  footer h3{color:#fff;margin-bottom:10px}
+  footer p{font-size:14px;opacity:.92}
+  footer .copy{text-align:center;margin-top:30px;font-size:12px;opacity:.7;border-top:1px solid rgba(255,255,255,.2);padding-top:16px}
+  .demo-entry{background:#fff;border:1px solid var(--line);border-radius:18px;padding:26px;max-width:820px;margin:0 auto;box-shadow:0 12px 30px rgba(14,107,70,.08)}
+  .de-label{font-size:13px;font-weight:700;color:var(--green);margin-bottom:10px}
+  .de-url{font-family:Consolas,Monaco,monospace;font-size:14px;background:#f4f8f6;border:1px dashed var(--line);border-radius:10px;padding:12px 14px;word-break:break-all;color:var(--ink)}
+  .de-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+  .de-note{font-size:12.5px;color:var(--muted);margin-top:14px;line-height:1.8}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-text">
+      <span class="badge">法治宣传方向 · 高校学生赛道</span>
+      <h1>山海普法通<br><span>AI 普法智能体</span></h1>
+      <div class="slogan">AI 让法律跨越山海，抵达“最后一公里”的每一位群众</div>
+      <p class="lead">面向边疆民族地区群众、青少年与东盟跨境人群的多模态 AI 普法智能体。以“山歌+AI”“数字人+闯关”“多语种跨境”破解普法“下不去、听不懂、看不适、接不住、测不准”五大难题。</p>
+      <div class="hero-cta">
+        <a class="btn" href="#features">了解六大功能</a>
+        <a class="btn alt" href="https://shanhaipufa-demo.app.workbuddy.host/?sharecode=YWLJVTPCL5" target="_blank" rel="noopener">▶ 打开交互原型 ↗</a>
+        <a class="btn ghost" href="#demo" style="border-color:rgba(255,255,255,.7);color:#fff">查看演示材料</a>
+      </div>
+    </div>
+    <div class="hero-img">
+      <img src="assets/Friendly_AI_legal_education_di_2026-11-04T10-37-27.png" alt="数字人壮小法主视觉">
+    </div>
+  </div>
+</header>
+
+<div class="disclaimer">本页为“山海普法通”AI普法智能体的产品概念展示页（设计稿 / 演示用途），所示界面为概念示意。可交互的静态原型见下方演示入口；两站均非已上线的生产运行系统，不连接生产 API、不采集真实用户数据。</div>
+
+<!-- 痛点 -->
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">为什么做这件事</div>
+      <h2>五大现实痛点：山 · 语 · 龄 · 海 · 效</h2>
+      <p>团队于 2025 年 7—9 月赴山区与边境 6 县开展调研，发放问卷 1,286 份、有效回收 1,174 份，深度访谈 62 人。问题真实，而非臆造。</p>
+    </div>
+    <div class="grid g5 pain">
+      <div class="card"><div class="num">山</div><h3>下不去</h3><p>边远山区法律人才稀缺，传统线下宣讲覆盖成本高、频次低，群众“找法难、问法难”。</p></div>
+      <div class="card"><div class="num">语</div><h3>听不懂</h3><p>部分群众更习惯壮语等民族语言或方言，普通话材料理解门槛高，“普到了”不等于“普懂了”。</p></div>
+      <div class="card"><div class="num">龄</div><h3>看不适</h3><p>青少年偏好短视频与互动，老年群体依赖口头讲解，现有内容形态单一，难以分众触达。</p></div>
+      <div class="card"><div class="num">海</div><h3>接不住</h3><p>面向东盟的跨境劳务、边贸、婚姻等涉外法律咨询快速增长，多语种供给严重不足。</p></div>
+      <div class="card"><div class="num">效</div><h3>测不准</h3><p>传统普法缺数据回流，学没学、懂没懂、用没用难以量化，资源投放缺依据。</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 六大功能 -->
+<section style="background:#eef5f1">
+  <div class="wrap">
+    <div class="sec-head" id="features">
+      <div class="kicker">核心能力</div>
+      <h2>六大核心功能模块</h2>
+      <p>集智能法律咨询、山歌普法、双语普法、沉浸式答题、法治数字人、普法驾驶舱于一体，多渠道触达。</p>
+    </div>
+    <div class="grid g2">
+      <div class="card feat"><div class="tag">💬</div><div><div class="sub">随口问、马上答</div><h3>AI 智能法律咨询</h3><p>基于 RAG + 法律知识图谱 + 多智能体协作，支持文字/语音/图片多模态输入；回答强制附法条出处、置信度分级、边界声明与转人工卡片。</p></div></div>
+      <div class="card feat"><div class="tag">🎶</div><div><div class="sub">用群众的话讲法</div><h3>山歌普法与情景普法</h3><p>AI 山歌生成器自动产出押韵山歌，驱动数字人演唱成短视频；支持方言情景剧脚本，经审核标识后“先审后播”。</p></div></div>
+      <div class="card feat"><div class="tag">🎮</div><div><div class="sub">闯关学法</div><h3>沉浸式知识答题</h3><p>四档题库（小学/中学/成人/涉外）、AI 出题、错题讲解、学法积分；不绑定学分成绩，不诱导沉迷。</p></div></div>
+      <div class="card feat"><div class="tag">🧑‍⚖️</div><div><div class="sub">看得见的普法员</div><h3>法治数字人“壮小法”</h3><p>融合壮锦纹样的原创虚拟形象与原创合成音色，进校园、政务大屏、主题直播多形态值守答疑。</p></div></div>
+      <div class="card feat"><div class="tag">🌏</div><div><div class="sub">让法律跨越江海</div><h3>多语种跨境普法</h3><p>中文—越南语已达可用水平，面向东盟提供中国法项下涉外事务办理指引；泰/老/缅语未达门槛，分档推进。</p></div></div>
+      <div class="card feat"><div class="tag">📊</div><div><div class="sub">给普法装上仪表盘</div><h3>普法工场与效果驾驶舱</h3><p>一键生成文案/海报/试题，人工审核后发布；聚合咨询热词、答题正确率、传播量等指标，精准普法闭环。</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 数字人 highlight -->
+<section>
+  <div class="wrap">
+    <div class="band">
+      <img src="assets/Smartphone_screen_mockup_showi_2026-11-04T10-37-53.png" alt="App 界面示意">
+      <div>
+        <h3>“一山一海一桥”设计理念</h3>
+        <p>以数字人“壮小法”（山）贴近民族地区群众，以多语种涉外法治宣传（海）面向东盟开放，以 AI 大模型（桥）贯通供需两侧，实现“法律知识人人可得、法治声音处处可闻”。系统采用“端—管—云—脑”四层解耦架构，法规库、热词表、数字人、山歌曲库均为可插拔配置包，天然支持“一套内核、多端本地化”低成本复制。</p>
+        <p style="margin-top:12px"><a class="btn ghost" href="#demo" style="border-color:#fff;color:#fff">查看演示入口 →</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 可信保障 -->
+<section style="background:#eef5f1">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">可信普法</div>
+      <h2>AI 回答可信性七道防线</h2>
+      <p>以“检索—校验—分级—转人工—审核”链条收口，系统只做“普法”，不做“断案”。</p>
+    </div>
+    <div class="defense">
+      <div class="def"><b>① 检索增强 RAG</b><span>知识库目标≥3000部，检索命中率≥95%</span></div>
+      <div class="def"><b>② 法条引用校验</b><span>引用准确率≥99%，不一致即重写/降级</span></div>
+      <div class="def"><b>③ 置信度分级转人工</b><span>低置信100%转12348/公共法律服务中心</span></div>
+      <div class="def"><b>④ 人工审核发布</b><span>法律+民族文化双审，先审后播</span></div>
+      <div class="def"><b>⑤ 安全拦截兜底</b><span>敏感问题识别召回，24h处置率100%</span></div>
+      <div class="def"><b>⑥ 评测与迭代</b><span>2000题评测集，季度盲测</span></div>
+      <div class="def"><b>⑦ 应急回滚</b><span>风险内容30分钟内停止输出</span></div>
+      <div class="def"><b>＋ 执业边界声明</b><span>每条回答固定提示“不构成法律意见”</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 创新点 -->
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">差异化优势</div>
+      <h2>五个维度创新</h2>
+      <p>文化、语言、形态、机制、安全五重创新叠加，形成同类产品难以复制的组合优势。</p>
+    </div>
+    <div class="grid g3">
+      <div class="inn"><div class="q">🎶</div><h3>文化创新 · 山歌+AI</h3><p>将壮族山歌非遗与生成式 AI 结合，让民族地区普法“入耳入心”，并方法学化为可量化指标。</p></div>
+      <div class="inn"><div class="q">🌐</div><h3>语言创新 · 双语+多语</h3><p>普通话+少数民族语言+东盟多语种三层能力，同时破解“山”的语言隔阂与“海”的跨境需求。</p></div>
+      <div class="inn"><div class="q">🕹️</div><h3>形态创新 · 数字人+闯关</h3><p>以法治数字人与游戏化答题重构体验，变“要我学”为“我要学”。</p></div>
+      <div class="inn"><div class="q">🔄</div><h3>机制创新 · 生产+评估闭环</h3><p>AI 普法工场提升供给效率，数据驾驶舱量化成效，形成可复制的智慧普法模式。</p></div>
+      <div class="inn"><div class="q">🛡️</div><h3>安全创新 · 可信普法</h3><p>法条溯源校验、人工审核、安全拦截三道防线，并前置嵌入合规义务。</p></div>
+      <div class="inn"><div class="q">📈</div><h3>轻量落地 · 0 GPU 可演示</h3><p>算力分三级，0 张 GPU 即可完整演示全部功能，单县复制约 1.5 个月、≤5 万元。</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 应用场景 -->
+<section style="background:#eef5f1">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">落地场景</div>
+      <h2>进乡村 · 进校园 · 进边关 · 进机关</h2>
+    </div>
+    <div class="scene">
+      <img src="assets/A_Guangxi_border_village_scene_2026-11-04T10-38-07.png" alt="乡村边境普法场景">
+      <ul>
+        <li>🏞️ <div><b>进乡村：</b>村级服务中心与乡村大喇叭，山歌普法“先审后播”每日一播，覆盖山区普法盲区。</div></li>
+        <li>🏫 <div><b>进校园：</b>数字人“AI 普法助教”辅助授课，答题闯关作课外素材，学校与法治副校长负主体责任。</div></li>
+        <li>🌏 <div><b>进边关：</b>口岸、边贸点部署多语种普法终端，服务跨境务工与边贸人群。</div></li>
+        <li>🏛️ <div><b>进机关：</b>为基层普法与公共法律服务提供内容生产与效果评估工具，助力数字化升级。</div></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 合规 -->
+<section>
+  <div class="wrap">
+    <div class="comp">
+      <h2>合规与伦理保障（核心优势）</h2>
+      <div class="sub">设计之初即将合规前置为系统约束，围绕七方面建立制度与技术双重保障</div>
+      <div class="row">
+        <div class="item"><h4>生成式 AI 服务合规</h4><p>以参赛高校为对外服务提供者与责任主体，上线前完成安全评估、应用登记与算法/深度合成备案公示。</p></div>
+        <div class="item"><h4>深度合成内容标识</h4><p>数字人形象与声音、AI 山歌均按 GB 45438—2025 添加显式与隐式标识，导出件强制带标。</p></div>
+        <div class="item"><h4>个人信息保护</h4><p>声纹等敏感信息最小必要处理，咨询记录假名化，跨境以“境内处理、结果输出”为基础并履行告知与单独同意。</p></div>
+        <div class="item"><h4>数据安全与内容安全</h4><p>分类分级、全链路加密、核心数据境内存储；敏感问题规则库拦截并转人工。</p></div>
+        <div class="item"><h4>法律服务执业边界</h4><p>定位普法工具，不输出个案结论、不计算时效；每条回答固定边界声明，紧迫问题即时转人工。</p></div>
+        <div class="item"><h4>算法伦理</h4><p>可解释可追溯、不歧视、辅助而非替代、人工兜底，机构岗位签批形成责任闭环。</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 成果与数据 -->
+<section style="background:#eef5f1">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">成果与规划</div>
+      <h2>原型成果与设计目标（规划值，非实测）</h2>
+      <p>v1.0 交互原型覆盖六大模块，并新增「自研模块验证台」与「现场评测台」；以下均为设计目标或规划值，不是实测结论。可现场复现的评测数值请到交互原型 ⑦/⑧ 查看，数值由评委本机浏览器计算。</p>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="big">v1.0</div><div class="lbl">交互原型（Web 单页静态）</div></div>
+      <div class="stat"><div class="big">2000+</div><div class="lbl">规划评测集规模（待建）</div></div>
+      <div class="stat"><div class="big">≥90%</div><div class="lbl">解答准确率（目标·未实测）</div></div>
+      <div class="stat"><div class="big">1.5月/≤5万</div><div class="lbl">单县复制成本（估算）</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 演示入口 -->
+<section style="background:#eef5f1" id="demo">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">演示入口</div>
+      <h2>产品演示入口</h2>
+      <p>下方链接为唯一对外演示入口。交互原型为静态预置问答，默认关闭实时生成、不连接生产 API、不采集真实用户数据；原型内含自研模块验证台与现场评测台，所有评测数值由评委本机浏览器现场计算。</p>
+    </div>
+    <div class="demo-entry">
+      <div class="de-label">官方演示入口 · 请填入方案附录二「在线演示站地址」与附录六核对清单</div>
+      <div class="de-url" id="demoUrl">https://shanhaipufa-demo.app.workbuddy.host/?sharecode=YWLJVTPCL5</div>
+      <div class="de-actions">
+        <a class="btn" href="https://shanhaipufa-demo.app.workbuddy.host/?sharecode=YWLJVTPCL5" target="_blank" rel="noopener">▶ 打开交互原型 ↗</a>
+        <button class="btn alt" id="copyBtn" type="button" style="border:0;cursor:pointer;font-family:inherit">📋 复制链接</button>
+      </div>
+      <p class="de-note">两站已串联：本页讲「为什么做」，交互原型证明「做出来了什么」；原型右上角可返回本页。体验二维码请由上方链接生成后贴入申报材料，此处不预置未核验的二维码图片。</p>
+    </div>
+    <div class="stats" style="margin-top:24px">
+      <div class="stat"><div class="big">✅</div><div class="lbl">交互原型（已上线 · 见上方链接）</div></div>
+      <div class="stat"><div class="big">✅</div><div class="lbl">自研模块验证台 / 现场评测报告 + CSV</div></div>
+      <div class="stat"><div class="big">⬜</div><div class="lbl">演示视频、体验二维码（待提交前补）</div></div>
+      <div class="stat"><div class="big">⬜</div><div class="lbl">代码仓库镜像、测试报告、试用反馈（待补）</div></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <h3>山海普法通 · AI 普法智能体</h3>
+      <p>“山海普法通”学生团队<br>参赛方向：法治宣传方向（高校学生赛道）<br><a href="https://shanhaipufa-demo.app.workbuddy.host/?sharecode=YWLJVTPCL5" target="_blank" rel="noopener" style="color:#ffe2a8;font-weight:700">▶ 打开交互原型 ↗</a></p>
+    </div>
+    <div>
+      <h3>核心理念</h3>
+      <p>以人工智能为桥，让法律知识翻越大山、跨过江海，<br>抵达“最后一公里”的每一位群众。</p>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="copy">本页面为“山海普法通”AI普法智能体的产品概念展示页，内容与 v1.0 交互原型对齐，所示界面与指标为设计与规划目标，非已上线运行系统。© 2026 山海普法通学生团队</div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var url = 'https://shanhaipufa-demo.app.workbuddy.host/?sharecode=YWLJVTPCL5';
+  var btn = document.getElementById('copyBtn');
+  if (!btn) return;
+  function done() { btn.textContent = '✅ 已复制'; setTimeout(function () { btn.textContent = '📋 复制链接'; }, 1600); }
+  btn.addEventListener('click', function () {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(url).then(done).catch(fallback);
+    } else fallback();
+    function fallback() {
+      var ta = document.createElement('textarea');
+      ta.value = url; document.body.appendChild(ta); ta.select();
+      try { document.execCommand('copy'); done(); } catch (e) { btn.textContent = '请手动复制上方链接'; }
+      document.body.removeChild(ta);
+    }
+  });
+})();
+</script>
+</body>
+</html>
